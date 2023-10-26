@@ -33,6 +33,22 @@ const options = {
 const specs = swaggerJsdoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
+
+
+// Enable CORS for all routes
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://snap-z-fe.vercel.app'); 
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
+// Routes
+app.use('/topics', topicsRouter);
+app.use('/posts', postsRouter);
+app.use("/dashboard", dashboardRouter);
+app.use("/auth", authenticationRouter);
+
 // Middleware to check the JWT for the routes that require authentication
 const checkAuth = (req, res, next) => {
   const token = req.header('Authorization');
@@ -49,20 +65,6 @@ const checkAuth = (req, res, next) => {
     res.status(400).json({ error: 'Invalid token.' });
   }
 };
-
-// Enable CORS for all routes
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://snap-z-fe.vercel.app'); 
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
-
-// Routes
-app.use('/topics', topicsRouter);
-app.use('/posts', postsRouter);
-app.use("/dashboard", dashboardRouter);
-app.use("/auth", authenticationRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
