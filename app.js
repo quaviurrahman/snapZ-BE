@@ -6,6 +6,7 @@ const swaggerUi = require('swagger-ui-express');
 const topicsRouter = require('./routes/topics.js');
 const postsRouter = require('./routes/posts.js');
 const dashboardRouter = require('./routes/dashboard.js')
+const authenticationRouter = require('./routes/users.js')
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -44,6 +45,7 @@ app.use((req, res, next) => {
 app.use('/topics', topicsRouter);
 app.use('/posts', postsRouter);
 app.use("/dashboard", dashboardRouter);
+app.use("/auth",authenticationRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
