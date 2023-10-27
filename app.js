@@ -10,7 +10,7 @@ const authenticationRouter = require('./routes/users.js')
 const cors = require ("cors");
 
 const app = express();
-app.use (cors({origin : "*"}));
+app.use (cors({origin : "https://snap-z-fe.vercel.app"}));
 const port = process.env.PORT || 3000;
 
 
