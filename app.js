@@ -7,8 +7,10 @@ const topicsRouter = require('./routes/topics.js');
 const postsRouter = require('./routes/posts.js');
 const dashboardRouter = require('./routes/dashboard.js')
 const authenticationRouter = require('./routes/users.js')
+const cors = require ("cors");
 
 const app = express();
+app.use (cors());
 const port = process.env.PORT || 3000;
 
 
@@ -33,15 +35,6 @@ const options = {
 const specs = swaggerJsdoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
-
-
-// Enable CORS for all routes
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://snap-z-fe.vercel.app'); 
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
 
 // Routes
 app.use('/topics', topicsRouter);
