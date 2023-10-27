@@ -20,6 +20,22 @@ mongoose.connect('mongodb+srv://revivefive:$h0kt0123!@cluster0.pevg4q9.mongodb.n
 
 app.use(bodyParser.json());
 
+// Middleware to check the JWT for the routes that require authentication
+const checkAuth = (req, res, next) => {
+  const token = req.header('Authorization');
+
+  if (!token) {
+    return res.status(401).json({ error: 'Access denied, please log in.' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, config.jwtSecret);
+    req.user = decoded;
+    next();
+  } catch (ex) {
+    res.status(400).json({ error: 'Invalid token.' });
+  }
+};
 // Swagger configuration
 const options = {
   definition: {
@@ -42,22 +58,7 @@ app.use('/posts', postsRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/auth", authenticationRouter);
 
-// Middleware to check the JWT for the routes that require authentication
-const checkAuth = (req, res, next) => {
-  const token = req.header('Authorization');
 
-  if (!token) {
-    return res.status(401).json({ error: 'Access denied, please log in.' });
-  }
-
-  try {
-    const decoded = jwt.verify(token, config.jwtSecret);
-    req.user = decoded;
-    next();
-  } catch (ex) {
-    res.status(400).json({ error: 'Invalid token.' });
-  }
-};
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
