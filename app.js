@@ -10,7 +10,6 @@ const authenticationRouter = require('./routes/users.js')
 const cors = require ("cors");
 
 const app = express();
-app.use (cors({origin : "https://snap-z-fe.vercel.app"}));
 const port = process.env.PORT || 3000;
 
 
@@ -53,6 +52,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 
 // Routes
+app.use (cors({origin : "https://snap-z-fe.vercel.app"}));
 app.use('/topics', topicsRouter);
 app.use('/posts', postsRouter);
 app.use("/dashboard", dashboardRouter);
