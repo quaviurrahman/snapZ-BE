@@ -7,7 +7,7 @@ const topicsRouter = require('./routes/topics.js');
 const postsRouter = require('./routes/posts.js');
 const dashboardRouter = require('./routes/dashboard.js')
 const authenticationRouter = require('./routes/users.js')
-const cors = require ("cors");
+const cors = require ('cors');
 
 const app = express();
 const port = process.env.PORT || 3000;
