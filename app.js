@@ -35,6 +35,8 @@ const checkAuth = (req, res, next) => {
     res.status(400).json({ error: 'Invalid token.' });
   }
 };
+
+
 // Swagger configuration
 const options = {
   definition: {
@@ -47,12 +49,13 @@ const options = {
   apis: ['./routes/*.js'],
 };
 
+checkAuth();
 const specs = swaggerJsdoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 
 // Routes
-app.use (cors({origin : "https://snap-z-fe.vercel.app"}));
+app.use(cors());
 app.use('/topics', topicsRouter);
 app.use('/posts', postsRouter);
 app.use("/dashboard", dashboardRouter);
