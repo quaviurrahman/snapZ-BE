@@ -3,9 +3,10 @@ const router = express.Router();
 const Post = require('../models/Post.js');
 const Topic = require('../models/Topic.js');
 const _ = require('lodash');
+const checkAuth = require("../routes/checkAuth")
 
 // Get list of Topics with latest posts
-router.get('/lastTopicPosts', async (req,res) => {
+router.get('/lastTopicPosts', checkAuth, async (req,res) => {
     try {
         const pipeline = [
             {

@@ -19,23 +19,6 @@ mongoose.connect('mongodb+srv://revivefive:$h0kt0123!@cluster0.pevg4q9.mongodb.n
 
 app.use(bodyParser.json());
 
-// Middleware to check the JWT for the routes that require authentication
-const checkAuth = (req, res, next) => {
-  const token = req.header('Authorization');
-
-  if (!token) {
-    return res.status(401).json({ error: 'Access denied, please log in.' });
-  }
-
-  try {
-    const decoded = jwt.verify(token, config.jwtSecret);
-    req.user = decoded;
-    next();
-  } catch (ex) {
-    res.status(400).json({ error: 'Invalid token.' });
-  }
-};
-
 
 // Swagger configuration
 const options = {
@@ -52,9 +35,10 @@ const options = {
 const specs = swaggerJsdoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
+// Global CORS middleware
+app.use(cors());
 
 // Routes
-app.use(cors());
 app.use('/topics', checkAuth(),topicsRouter);
 app.use('/posts', checkAuth(), postsRouter);
 app.use("/dashboard", checkAuth(), dashboardRouter);

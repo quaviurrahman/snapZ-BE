@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Topic = require('../models/Topic');
+const checkAuth = require("../routes/checkAuth")
 
 // Create a new topic
-router.post('/', async (req, res) => {
+router.post('/', checkAuth, async (req, res) => {
   try {
     const topic = new Topic(req.body);
     const savedTopic = await topic.save();
@@ -14,7 +15,7 @@ router.post('/', async (req, res) => {
 });
 
 // Update a topic
-router.put('/:topicId', async (req, res) => {
+router.put('/:topicId', checkAuth, async (req, res) => {
   try {
     const updatedTopic = await Topic.findByIdAndUpdate(req.params.topicId, req.body, { new: true });
     res.json(updatedTopic);
@@ -24,7 +25,7 @@ router.put('/:topicId', async (req, res) => {
 });
 
 // Delete a topic
-router.delete('/:topicId', async (req, res) => {
+router.delete('/:topicId', checkAuth, async (req, res) => {
   try {
     await Topic.findByIdAndRemove(req.params.topicId);
     res.json({ message: 'Topic deleted successfully' });
@@ -34,7 +35,7 @@ router.delete('/:topicId', async (req, res) => {
 });
 
 // Get a list of topic
-router.get('/topiclist',async (req,res) => {
+router.get('/topiclist',checkAuth, async (req,res) => {
   try {
     const topicList = await Topic.find()
     res.json (topicList)
