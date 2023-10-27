@@ -49,16 +49,15 @@ const options = {
   apis: ['./routes/*.js'],
 };
 
-checkAuth();
 const specs = swaggerJsdoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 
 // Routes
 app.use(cors());
-app.use('/topics', topicsRouter);
-app.use('/posts', postsRouter);
-app.use("/dashboard", dashboardRouter);
+app.use('/topics', checkAuth(),topicsRouter);
+app.use('/posts', checkAuth(), postsRouter);
+app.use("/dashboard", checkAuth(), dashboardRouter);
 app.use("/auth", authenticationRouter);
 
 
