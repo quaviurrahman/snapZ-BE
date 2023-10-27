@@ -47,11 +47,53 @@ router.post("/register",async (req,res) => {
             // Domain not recognized, prompt for company name
             return res.json({ promptCompany: true });
           }
+
+
         } catch (err) {
           res.status(400).json({ error: err.message });
         }
       });
 
+
+      router.post('/verify', async (req, res) => {
+        try {
+          const { email, otpCode, company } = req.body;
+          const user = await User.findOne({ email, otpCode });
+      
+          if (!user) {
+            return res.status(401).json({ error: 'Invalid OTP code' });
+          }
+      
+          // Save the company name if provided
+          if (company) {
+            allowedDomains[user.email.split('@')[1]] = company;
+          }
+      
+          user.otpCode = undefined; // Clear OTP code
+          await user.save();
+          res.json({ message: 'Registration successful' });
+        } catch (err) {
+          res.status(400).json({ error: err.message });
+        }
+      });
+
+      function sendOTP(email, otpCode) {
+        // Simulate sending OTP email
+        const mailOptions = {
+          from: 'your.email@gmail.com',
+          to: email,
+          subject: 'Verification Code for Registration',
+          text: `Your OTP code is: ${otpCode}`,
+        };
+      
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.error('Error sending OTP email:', error);
+          } else {
+            console.log('OTP email sent: ' + info.response);
+          }
+        });
+      }
 
 
 // User Login
