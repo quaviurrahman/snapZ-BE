@@ -39,9 +39,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use(cors());
 
 // Routes
-app.use('/topics', checkAuth(),topicsRouter);
-app.use('/posts', checkAuth(), postsRouter);
-app.use("/dashboard", checkAuth(), dashboardRouter);
+app.use('/topics', topicsRouter);
+app.use('/posts', postsRouter);
+app.use("/dashboard", dashboardRouter);
 app.use("/user", userRouter);
 
 
