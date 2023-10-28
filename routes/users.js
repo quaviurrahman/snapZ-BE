@@ -6,13 +6,13 @@ const jwt = require("jsonwebtoken")
 const notAllowedDomains = ["gmail.com","yahoo.com"];
 
 // simulated email service setup
-const transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-      user: 'your.email@gmail.com', // Replace with your Gmail address
-      pass: 'your-password',       // Replace with your Gmail password
-    },
-  });
+// const transporter = nodemailer.createTransport({
+//     service: 'Gmail',
+//     auth: {
+//       user: 'your.email@gmail.com', // Replace with your Gmail address
+//       pass: 'your-password',       // Replace with your Gmail password
+//     },
+//   });
 
 //User registration
 router.post("/register",async (req,res) => {
@@ -36,7 +36,7 @@ router.post("/register",async (req,res) => {
             // Simulate OTP email sending
             const otpCode = generateOTP();
             console.log(otpCode);
-            sendOTP(email, otpCode);
+            //sendOTP(email, otpCode);
       
             const user = new User({ username, password, email, company });
       
@@ -77,23 +77,23 @@ router.post('/verify', async (req, res) => {
         }
       });
 
-function sendOTP(email, otpCode) {
-        // Simulate sending OTP email
-        const mailOptions = {
-          from: 'your.email@gmail.com',
-          to: email,
-          subject: 'Verification Code for Registration',
-          text: `Your OTP code is: ${otpCode}`,
-        };
+// function sendOTP(email, otpCode) {
+//         // Simulate sending OTP email
+//         const mailOptions = {
+//           from: 'your.email@gmail.com',
+//           to: email,
+//           subject: 'Verification Code for Registration',
+//           text: `Your OTP code is: ${otpCode}`,
+//         };
       
-        transporter.sendMail(mailOptions, (error, info) => {
-          if (error) {
-            console.error('Error sending OTP email:', error);
-          } else {
-            console.log('OTP email sent: ' + info.response);
-          }
-        });
-      }
+      //   transporter.sendMail(mailOptions, (error, info) => {
+      //     if (error) {
+      //       console.error('Error sending OTP email:', error);
+      //     } else {
+      //       console.log('OTP email sent: ' + info.response);
+      //     }
+      //   });
+      // }
 
 
 // User Login
