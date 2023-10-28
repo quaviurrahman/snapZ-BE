@@ -15,7 +15,6 @@ const transporter = nodemailer.createTransport({
   });
 
 //User registration
-
 router.post("/register",async (req,res) => {
     try {
         const { username, password, email } = req.body;
@@ -36,6 +35,7 @@ router.post("/register",async (req,res) => {
             const company = await User.findOne({ email: existingDomains[0] }).then(user => user.company);
             // Simulate OTP email sending
             const otpCode = generateOTP();
+            console.log(otpCode);
             sendOTP(email, otpCode);
       
             const user = new User({ username, password, email, company });
@@ -55,7 +55,7 @@ router.post("/register",async (req,res) => {
       });
 
 
-      router.post('/verify', async (req, res) => {
+router.post('/verify', async (req, res) => {
         try {
           const { email, otpCode, company } = req.body;
           const user = await User.findOne({ email, otpCode });
@@ -77,7 +77,7 @@ router.post("/register",async (req,res) => {
         }
       });
 
-      function sendOTP(email, otpCode) {
+function sendOTP(email, otpCode) {
         // Simulate sending OTP email
         const mailOptions = {
           from: 'your.email@gmail.com',

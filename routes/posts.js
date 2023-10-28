@@ -3,7 +3,7 @@ const router = express.Router();
 const Post = require('../models/Post.js');
 const Topic = require('../models/Topic.js');
 const { get } = require('lodash');
-const checkAuth = require("../routes/checkAuth")
+const checkAuth = require("../routes/checkAuth.js")
 
 // Create a new post for a topic
 router.post('/:topicId', checkAuth, async (req, res) => {
@@ -62,6 +62,6 @@ router.get('/:topicId', checkAuth, async (req, res) => {
   } catch (err) {
     res.status(400).json({error: err.message})
   }
-})
+});
 
 module.exports = router;

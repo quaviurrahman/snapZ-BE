@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Topic = require('../models/Topic');
-const checkAuth = require("../routes/checkAuth")
+const checkAuth = require("../routes/checkAuth.js")
 
 // Create a new topic
 router.post('/', checkAuth, async (req, res) => {
