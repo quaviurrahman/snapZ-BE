@@ -6,7 +6,7 @@ const swaggerUi = require('swagger-ui-express');
 const topicsRouter = require('./routes/topics.js');
 const postsRouter = require('./routes/posts.js');
 const dashboardRouter = require('./routes/dashboard.js')
-const authenticationRouter = require('./routes/users.js')
+const userRouter = require('./routes/users.js')
 const cors = require ('cors');
 
 const app = express();
@@ -42,7 +42,7 @@ app.use(cors());
 app.use('/topics', checkAuth(),topicsRouter);
 app.use('/posts', checkAuth(), postsRouter);
 app.use("/dashboard", checkAuth(), dashboardRouter);
-app.use("/auth", authenticationRouter);
+app.use("/user", userRouter);
 
 
 
