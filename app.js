@@ -41,8 +41,8 @@ app.use(cors());
 // Routes
 app.use('/topics', topicsRouter);
 app.use('/posts', postsRouter);
-app.use("/dashboard", dashboardRouter);
-app.use("/user", userRouter);
+app.use('/dashboard', dashboardRouter);
+app.use('/user', userRouter);
 
 
 
