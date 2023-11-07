@@ -8,7 +8,7 @@ const checkAuth = (req, res, next) => {
   }
 
   try {
-    const jwtSecret = "snapZ"
+    const jwtSecret = 'snapZ'
     const decoded = jwt.verify(token, jwtSecret);
     req.user = decoded;
     next();
