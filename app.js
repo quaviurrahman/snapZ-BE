@@ -20,20 +20,20 @@ mongoose.connect('mongodb+srv://revivefive:$h0kt0123!@cluster0.pevg4q9.mongodb.n
 app.use(bodyParser.json());
 
 
-// Swagger configuration
-const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Forum API',
-      version: '1.0.0',
-    },
-  },
-  apis: ['./routes/*.js'],
-};
+// // Swagger configuration
+// const options = {
+//   definition: {
+//     openapi: '3.0.0',
+//     info: {
+//       title: 'Forum API',
+//       version: '1.0.0',
+//     },
+//   },
+//   apis: ['./routes/*.js'],
+// };
 
-const specs = swaggerJsdoc(options);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+// const specs = swaggerJsdoc(options);
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // Global CORS middleware
 app.use(cors());
