@@ -14,7 +14,7 @@ const notAllowedDomains = ["gmail.com","yahoo.com"];
 //   });
 
 //User registration
-router.post("/register",async (req,res) => {
+router.post('/register',async (req,res) => {
     try {
         const { username, password, email } = req.body;
         
@@ -96,7 +96,7 @@ router.post('/verify', async (req, res) => {
 
 
 // User Login
-router.post("/login", async (req, res) => {
+router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({username});
 
