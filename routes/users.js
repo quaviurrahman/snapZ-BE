@@ -13,7 +13,7 @@ const notAllowedDomains = ["gmail.com","yahoo.com"];
 //     },
 //   });
 
-//User registration
+// Register a User
 router.post('/register',async (req,res) => {
     try {
         const { username, password, email } = req.body;
@@ -58,7 +58,7 @@ router.post('/register',async (req,res) => {
         }
       });
 
-
+// Verify a token
 router.post('/verify', async (req, res) => {
         try {
           const { email, otpCode, company } = req.body;
@@ -106,11 +106,12 @@ router.post('/login', async (req, res) => {
     const jwtSecret = 'snapZ'
     const token = jwt.sign({ userId: user._id}, jwtSecret)
     res.json({ token })
-})
+});
 
+// Function to generate OPT code
 function generateOTP() {
   // Simulate OTP generation
   return Math.floor(1000 + Math.random() * 9000).toString();
-}
+};
 
 module.exports = router;
