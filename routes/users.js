@@ -100,7 +100,7 @@ router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({username});
 
-    if(!user || !User.comparePassword(password)) {
+    if(!user || !user.comparePassword(password)) {
         return res.status(401).json({ error : "Invalid Username or Password!"});
     }
     const jwtSecret = 'snapZ'
