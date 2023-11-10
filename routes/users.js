@@ -1,7 +1,7 @@
-const express = require ("express");
+const express = require ('express');
 const router = express.Router();
-const User = require ("../models/User.js")
-const jwt = require("jsonwebtoken")
+const User = require ('../models/User.js')
+const jwt = require('jsonwebtoken')
 const notAllowedDomains = ["gmail.com","yahoo.com"];
 
 // simulated email service setup

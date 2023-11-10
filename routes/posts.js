@@ -3,7 +3,7 @@ const router = express.Router();
 const Post = require('../models/Post.js');
 const Topic = require('../models/Topic.js');
 const { get } = require('lodash');
-const checkAuth = require("../routes/checkAuth.js")
+const checkAuth = require('../routes/checkAuth.js')
 
 // Create a new post for a topic
 router.post('/:topicId', checkAuth, async (req, res) => {
