@@ -105,7 +105,11 @@ router.post('/login', async (req, res) => {
     }
     const jwtSecret = 'snapZ'
     const token = jwt.sign({ userId: user._id}, jwtSecret)
-    res.json({ token })
+    res.json({
+      token,
+      username: user.username,
+      company: user.company,
+    })
 });
 
 // Function to generate OPT code
