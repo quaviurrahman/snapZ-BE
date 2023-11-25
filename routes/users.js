@@ -104,11 +104,12 @@ router.post('/login', async (req, res) => {
         return res.status(401).json({ error : "Invalid Username or Password!"});
     }
     const jwtSecret = 'snapZ'
-    const token = jwt.sign({ userId: user._id}, jwtSecret)
+    const token = jwt.sign({ userId: user._id}, jwtSecret, {expiresIn : '1h'})
     res.json({
       token,
       username: user.username,
       company: user.company,
+      expiresIn: 3600,
     })
 });
 
